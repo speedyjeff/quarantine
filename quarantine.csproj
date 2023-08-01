@@ -1,0 +1,57 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net7.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="media\airplane.png" />
+    <None Remove="media\airplane.small.png" />
+    <None Remove="media\evaculation.png" />
+    <None Remove="media\globe.png" />
+    <None Remove="media\hospital.png" />
+    <None Remove="media\hospital.small.png" />
+    <None Remove="media\large.png" />
+    <None Remove="media\news.png" />
+    <None Remove="media\plusi.png" />
+    <None Remove="media\plusp.png" />
+    <None Remove="media\roadblock.png" />
+    <None Remove="media\roadblock.small.png" />
+    <None Remove="media\small.png" />
+    <None Remove="media\streetpatrol.png" />
+    <None Remove="media\streetpatrol.small.png" />
+    <None Remove="media\terminal.png" />
+    <None Remove="media\terminal.small.png" />
+    <None Remove="media\title.png" />
+    <None Remove="media\vigilanty.png" />
+    <None Remove="media\vigilanty.small.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="media\airplane.png" />
+    <Resource Include="media\airplane.small.png" />
+    <Resource Include="media\evaculation.png" />
+    <Resource Include="media\globe.png" />
+    <Resource Include="media\hospital.png" />
+    <Resource Include="media\hospital.small.png" />
+    <Resource Include="media\large.png" />
+    <Resource Include="media\news.png" />
+    <Resource Include="media\plusi.png" />
+    <Resource Include="media\plusp.png" />
+    <Resource Include="media\roadblock.png" />
+    <Resource Include="media\roadblock.small.png" />
+    <Resource Include="media\small.png" />
+    <Resource Include="media\streetpatrol.png" />
+    <Resource Include="media\streetpatrol.small.png" />
+    <Resource Include="media\terminal.png" />
+    <Resource Include="media\terminal.small.png" />
+    <Resource Include="media\title.png" />
+    <Resource Include="media\vigilanty.png" />
+    <Resource Include="media\vigilanty.small.png" />
+  </ItemGroup>
+
+</Project>

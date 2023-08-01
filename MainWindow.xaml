@@ -1,0 +1,356 @@
+﻿<Window x:Class="quarantine.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:quarantine"
+        mc:Ignorable="d"
+        Title="Contain Them">
+    
+    <Grid Background="White">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="50*"/>
+            <RowDefinition Height="5*"/>
+            <RowDefinition Height="15*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- header -->
+        <Grid Grid.Row="0">
+           <Grid.ColumnDefinitions>
+               <ColumnDefinition Width="5*"/>
+               <ColumnDefinition Width="20*"/>
+               <ColumnDefinition Width="5*"/>
+           </Grid.ColumnDefinitions>
+                
+           <StackPanel Grid.Column="0" Orientation="Vertical" HorizontalAlignment="Left">
+               <Label FontWeight="Bold" Content="Day" />
+               <Label Name="Day_Label" Content="0" FontSize="16" />
+           </StackPanel>
+                
+           <Image Grid.Column="1" VerticalAlignment="Top" Stretch="Fill" Source="/quarantine;component/media/title.png" HorizontalAlignment="Center" />
+
+           <StackPanel Grid.Column="2" Orientation="Vertical" HorizontalAlignment="Right">
+               <Label Content="World Population" FontWeight="Bold" FontSize="13" />
+               <Label Name="Population_Label" Content="7,000,000,000" FontSize="16" FlowDirection="RightToLeft" />
+            </StackPanel>
+        </Grid>
+
+        <!-- play game -->
+        <Grid Grid.Row="1">
+            <Image Stretch="Fill" Source="/quarantine;component/media/globe.png" MouseEnter="Image_MouseEnter"/>
+            <Grid Name="LayoutRoot" />
+        </Grid>
+          
+        <!-- news -->
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="9*"/>
+            </Grid.ColumnDefinitions>
+            
+            <Image Grid.Column="0" Stretch="Fill" Source="/quarantine;component/media/news.png" />
+            <Grid Grid.Column="1" Name="NewsFlash_Grid">
+                <Rectangle Stroke="Black" StrokeThickness="1" Stretch="Fill"/>
+                <Label Name="NewsFlash_Label" VerticalAlignment="Center" />
+            </Grid>
+        </Grid>
+
+        <!-- details -->
+        <Grid Grid.Row="3">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- left -->
+            <Grid Grid.Column="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Label Grid.Row="0" Grid.Column="0" FontSize="13" FontWeight="Bold" Content="Infected" FlowDirection="RightToLeft" />
+                    <Label Grid.Row="1" Grid.Column="0" Name="Infected_Label" Content="7,000,000,000" FlowDirection="RightToLeft" />
+
+                    <Label Grid.Row="0" Grid.Column="1" Content="Dead" FontSize="13" FontWeight="Bold" FlowDirection="RightToLeft" />
+                    <Label Grid.Row="1" Grid.Column="1" Name="Dead_Label" Content="7,000,000,000" FlowDirection="RightToLeft" />
+
+                    <Label Grid.Row="0" Grid.Column="2" Content="Casualties" FlowDirection="RightToLeft" FontSize="13" FontWeight="Bold"/>
+                    <Label Grid.Row="1" Grid.Column="2" Content="7,000,000,000" FlowDirection="RightToLeft" Name="Causualties_Label" />
+
+                    <Label Grid.Row="2" Grid.Column="0" Content="Avg/Min/Max Days:" FontWeight="Bold" />
+                    <Label Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Name="AverageDays_Label" Content="999/99/999" />
+
+                    <Button Grid.Row="3" Grid.Column="0" Content="Next day" Name="NextDay_Button" Click="NextDay_Button_Click" />
+                    <CheckBox Grid.Row="3" Grid.Column="1" Content="Auto" Name="Auto_Nextday" Checked="Auto_Nextday_Checked" Unchecked="Auto_Nextday_Unchecked" />
+
+                    <Button Grid.Row="4" Grid.Column="0" Content="Restart" Name="Restart_Button" Click="Restart_Button_Click" />
+                    <CheckBox Grid.Row="4" Grid.Column="1" Content="Auto" Name="Restart_Checkbox" />
+
+                    <CheckBox Grid.Row="3" Grid.Column="2" Content="Auto Defenses" Name="AutoDefense_Checkbox" />
+                    <Button Grid.Row="4" Grid.Column="2" Content="Settings" Name="Settings_Button" Click="Settings_Button_Click" />
+
+                <Rectangle Grid.Row="0" Grid.Column="0" Grid.RowSpan="5" Grid.ColumnSpan="3" Stroke="Black" StrokeThickness="1" Stretch="Fill"/>
+            </Grid>
+                    
+            <!-- center -->
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                
+                <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5" Content="Single use" FontWeight="Bold" />
+                <Image Grid.Row="1" Grid.Column="0" Name="StreetPatrol_Image" Stretch="Fill" Source="/quarantine;component/media/streetpatrol.png" MouseLeftButtonUp="StreetPatrol_Image_MouseLeftButtonUp" />
+                <Image Grid.Row="1" Grid.Column="1" Name="RoadBlock_Image" Source="/quarantine;component/media/roadblock.png" MouseLeftButtonUp="RoadBlock_Image_MouseLeftButtonUp" />
+                <Image Grid.Row="1" Grid.Column="2" Name="Vigilantly_Image" Source="/quarantine;component/media/vigilanty.png" MouseLeftButtonUp="Vigilantly_Image_MouseLeftButtonUp" />
+                <Image Grid.Row="1" Grid.Column="3" Name="Medic_Image" Source="/quarantine;component/media/hospital.png" MouseLeftButtonUp="Medic_Image_MouseLeftButtonUp" />
+                <Image Grid.Row="1" Grid.Column="4" Name="AirSearch_Image" Source="/quarantine;component/media/terminal.png" MouseLeftButtonUp="AirSearch_Image_MouseLeftButtonUp" />
+
+                <Rectangle Grid.Row="2" Grid.Column="0" Grid.RowSpan="2" Grid.ColumnSpan="5" Stroke="Black" StrokeThickness="1" Stretch="Fill" />
+                <Label Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="5" Content="Continual use" FontWeight="Bold" />
+                <Image Grid.Row="3" Grid.Column="0" Name="SmallTerminate_Image" Source="/quarantine;component/media/small.png" Stretch="Fill" MouseLeftButtonUp="SmallTerminate_Image_MouseLeftButtonUp" />
+                <Image Grid.Row="3" Grid.Column="1" Name="LargeTerminate_Image" Source="/quarantine;component/media/large.png" Stretch="Fill" MouseLeftButtonUp="LargeTerminate_Image_MouseLeftButtonUp" />
+                <Image Grid.Row="3" Grid.Column="2" Name="Evacuation_Image" Source="/quarantine;component/media/evaculation.png" Stretch="Fill" MouseLeftButtonUp="Evacuation_Image_MouseLeftButtonUp" />
+                <Image Grid.Row="3" Grid.Column="3" Name="PlusInfected_Image" Source="/quarantine;component/media/plusi.png" Stretch="Fill" MouseLeftButtonUp="PlusInfected_Image_MouseLeftButtonUp" />
+                <Image Grid.Row="3" Grid.Column="4" Name="PlusPopulation_Image" Source="/quarantine;component/media/plusp.png" Stretch="Fill" MouseLeftButtonUp="PlusPopulation_Image_MouseLeftButtonUp" />
+
+                <Rectangle Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Grid.ColumnSpan="5" Stroke="Black" StrokeThickness="1" Stretch="Fill"/>
+            </Grid>
+            
+            <!-- right -->
+            <Grid Grid.Column="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="10*" />
+                    <ColumnDefinition Width="10*" />
+                    <ColumnDefinition Width="10*" />
+                </Grid.ColumnDefinitions>
+                
+                <Image Grid.Row="0" Grid.Column="0" Name="DeteriantIcon_Image" HorizontalAlignment="Left"/>
+                <Label Grid.Row="0" Grid.Column="1" Name="DeteriantTitle_Label" FontWeight="Bold" />
+                
+                <Label Grid.Row="1" Grid.Column="0" Content="Population:" />
+                <Label Grid.Row="1" Grid.Column="1" Name="DeteriantPopulation_Label" />
+
+                <Label Grid.Row="2" Grid.Column="0" Content="Infected:" />
+                <Label Grid.Row="2" Grid.Column="1" Name="DeteriantInfected_Label" />
+
+                <Label Grid.Row="3" Grid.Column="0" Content="Proximity:" />
+                <Label Grid.Row="3" Grid.Column="1" Name="DeteriantNoSpaces_Label" />
+
+                <Label Grid.Row="4" Grid.Column="0" Content="Remaining:" />
+                <Label Grid.Row="4" Grid.Column="1" Name="DeteriantItems_Label" />
+
+                <TextBlock Grid.Row="1" Grid.Column="2" Grid.RowSpan="5" Name="DeteriantDesc_TextBlock" Text="&lt;select deteriant to view details&gt;" TextWrapping="Wrap" />
+
+                <Rectangle Grid.Column="0" Grid.Row="0" Grid.RowSpan="5" Grid.ColumnSpan="3" Stroke="Black" StrokeThickness="2" Stretch="Fill"/>
+            </Grid>
+        </Grid>
+
+        <!-- settings -->
+        <Grid Grid.Row="0" Grid.Column="0" Grid.RowSpan="4" Name="Settings_Grid" Background="White" Visibility="Collapsed">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="10*"/>
+                <RowDefinition Height="10*"/>
+            </Grid.RowDefinitions>
+
+            <Rectangle Stroke="Black" StrokeThickness="1" Stretch="Fill" />
+
+            <!-- row 0-->
+            <Button Grid.Row="0" Content="X" Name="Hide_Button" Click="Hide_Button_Click" HorizontalAlignment="Right" VerticalAlignment="Top"/>
+            <Label Grid.Row="0" Content="Settings..." FontWeight="Bold" FontSize="18" HorizontalAlignment="Left" VerticalAlignment="Top" />
+
+            <!-- row 1 -->
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                </Grid.RowDefinitions>
+
+                <Label Grid.Row="0" Grid.Column="0" Content="Initial number of defenses:" />
+                <Slider Grid.Row="0" Grid.Column="1"  Name="SettingsInitial_Slider" Maximum="25" ValueChanged="SettingsInitial_Slider_ValueChanged" SmallChange="1" />
+                <Label Grid.Row="0" Grid.Column="2"  Name="SettingsInitial_Label" />
+
+                <Label Grid.Row="1" Grid.Column="0" Content="Defenses added each day:" />
+                <Slider Grid.Row="1" Grid.Column="1" Name="SettingsPerDay_Slider" ValueChanged="SettingsPerDay_Slider_ValueChanged" SmallChange="1" />
+                <Label Grid.Row="1" Grid.Column="2" Name="SettingsPerDay_Label" />
+
+                <Label Grid.Row="2" Grid.Column="0" Content="Days until infected die:" />
+                <Slider Grid.Row="2" Grid.Column="1" Name="SettingsDaysToDeath_Slider" Maximum="25" SmallChange="1" ValueChanged="SettingsDaysToDeath_Slider_ValueChanged" Minimum="1" />
+                <Label Grid.Row="2" Grid.Column="2" Name="SettingsDaysToDeath_Label" />
+
+                <Label Grid.Row="3" Grid.Column="0" Content="Medic:" />
+                <Slider Grid.Row="3" Grid.Column="1" Name="SettingsMInf_Slider" LargeChange="0.01" Maximum="1" Minimum="0" SmallChange="0.01" ValueChanged="SettingsMInf_Slider_ValueChanged" />
+                <Label Grid.Row="3" Grid.Column="2" Name="SettingsMInf_Label" />
+
+                <Label Grid.Row="4" Grid.Column="0" Content="Evacuation:" />
+                <Slider Grid.Row="4" Grid.Column="1" Name="SettingsEPop_Slider" LargeChange="0.01" Maximum="1" Minimum="0" SmallChange="0.01" ValueChanged="SettingsEPop_Slider_ValueChanged" />
+                <Label Grid.Row="4" Grid.Column="2" Name="SettingsEPop_Label" />
+
+                <Label Grid.Row="5" Grid.Column="0" Content="Add Infected:" />
+                <Slider Grid.Row="5" Grid.Column="1" Name="SettingsAIInf_Slider" LargeChange="1" Maximum="1000" Minimum="0" SmallChange="1" ValueChanged="SettingsAIInf_Slider_ValueChanged" />
+                <Label Grid.Row="5" Grid.Column="2" Name="SettingsAIInf_Label" />
+
+                <Label Grid.Row="6" Grid.Column="0" Content="Add Population:" />
+                <Slider Grid.Row="6" Grid.Column="1" Name="SettingsAPPop_Slider" LargeChange="1" Maximum="5000" Minimum="0" SmallChange="1" ValueChanged="SettingsAPPop_Slider_ValueChanged" />
+                <Label Grid.Row="6" Grid.Column="2" Name="SettingsAPPop_Label" />
+
+                <Label Grid.Row="7" Grid.Column="0" Content="Initial Infected Regions:" />
+                <Slider Grid.Row="7" Grid.Column="1"  Name="SettingsInfRegions_Slider" Maximum="100" Minimum="1" SmallChange="1" ValueChanged="SettingsInfRegions_Slider_ValueChanged" />
+                <Label Grid.Row="7" Grid.Column="2" Name="SettingsInfRegions_Label" />
+
+                <Label Grid.Row="8" Grid.Column="0" Content="Initial Infected per Region:" />
+                <Slider Grid.Row="8" Grid.Column="1" Name="SettingsInfPRegion_Slider" Maximum="10000" Minimum="1" SmallChange="1" ValueChanged="SettingsInfPRegion_Slider_ValueChanged" />
+                <Label Grid.Row="8" Grid.Column="2" Name="SettingsInfPRegion_Label" />
+            </Grid>
+
+            <!-- row 2 -->
+            <Grid Grid.Row="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+
+                <!-- headers -->
+                <Label Grid.Row="0" Grid.Column="1" Content="Population" FontWeight="Bold" />
+                <Label Grid.Row="0" Grid.Column="3" Content="Infected" FontWeight="Bold" />
+
+                <Label Grid.Row="1" Grid.Column="0" Content="Street Patrol:" />
+                <Slider Grid.Row="1" Grid.Column="1" Name="SettingsSPPop_Slider" Maximum="1" Minimum="0" SmallChange="0.01" ValueChanged="SettingsSPPop_Slider_ValueChanged" LargeChange="0.01" />
+                <Label Grid.Row="1" Grid.Column="2" Name="SettingsSPPop_Label" />
+                <Slider Grid.Row="1" Grid.Column="3" Name="SettingsSPInf_Slider" Maximum="1" Minimum="0" SmallChange="0.01" ValueChanged="SettingsSPInf_Slider_ValueChanged" LargeChange="0.01" />
+                <Label Grid.Row="1" Grid.Column="4" Name="SettingsSPInf_Label" />
+
+                <Label Grid.Row="2" Grid.Column="0" Content="Road Block:" />
+                <Slider Grid.Row="2" Grid.Column="1" Name="SettingsRBPop_Slider" LargeChange="0.01" Maximum="1" Minimum="0" SmallChange="0.01" ValueChanged="SettingsRBPop_Slider_ValueChanged" />
+                <Label Grid.Row="2" Grid.Column="2" Name="SettingsRBPop_Label"  />
+                <Slider Grid.Row="2" Grid.Column="3" Name="SettingsRBInf_Slider" Maximum="1" Minimum="0" SmallChange="0.01" ValueChanged="SettingsRBInf_Slider_ValueChanged" />
+                <Label Grid.Row="2" Grid.Column="4" Name="SettingsRBInf_Label"  />
+
+                <Label Grid.Row="3" Grid.Column="0" Content="Roving Vigilanties:" />
+                <Slider Grid.Row="3" Grid.Column="1" Name="SettingsRVPop_Slider" LargeChange="0.01" Maximum="1" Minimum="0" SmallChange="0.01" ValueChanged="SettingsRVPop_Slider_ValueChanged" />
+                <Label Grid.Row="3" Grid.Column="2" Name="SettingsRVPop_Label" />
+                <Slider Grid.Row="3" Grid.Column="3" Name="SettingsRVInf_Slider" LargeChange="0.01" Maximum="1" Minimum="0" SmallChange="0.01" ValueChanged="SettingsRVInf_Slider_ValueChanged" />
+                <Label Grid.Row="3" Grid.Column="4" Name="SettingsRVInf_Label" />
+
+                <Label Grid.Row="4" Grid.Column="0" Content="Terminal Screening:" />
+                <Slider Grid.Row="4" Grid.Column="1" Name="SettingsTSPop_Slider" LargeChange="0.01" Maximum="1" Minimum="0" SmallChange="0.01" ValueChanged="SettingsTSPop_Slider_ValueChanged" />
+                <Label Grid.Row="4" Grid.Column="2" Name="SettingsTSPop_Label" />
+                <Slider Grid.Row="4" Grid.Column="3" Name="SettingsTSInf_Slider" LargeChange="0.01" Maximum="1" Minimum="0" SmallChange="0.01" ValueChanged="SettingsTSInf_Slider_ValueChanged" />
+                <Label Grid.Row="4" Grid.Column="4" Name="SettingsTSInf_Label" />
+
+                <Label Grid.Row="5" Grid.Column="0" Content="Nerve Gas:" />
+                <Slider Grid.Row="5" Grid.Column="1" Name="SettingsNGPop_Slider" LargeChange="0.01" Maximum="1" Minimum="0" SmallChange="0.01" ValueChanged="SettingsNGPop_Slider_ValueChanged" />
+                <Label Grid.Row="5" Grid.Column="2" Name="SettingsNGPop_Label" />
+                <Slider Grid.Row="5" Grid.Column="3" Name="SettingsNGInf_Slider" LargeChange="0.01" Maximum="1" Minimum="0" SmallChange="0.01" ValueChanged="SettingsNGInf_Slider_ValueChanged" />
+                <Label Grid.Row="5" Grid.Column="4" Name="SettingsNGInf_Label"  />
+
+                <Label Grid.Row="6" Grid.Column="0" Content="Nuclear Weapon:" />
+                <Slider Grid.Row="6" Grid.Column="1" Name="SettingsNWPop_Slider" LargeChange="0.01" Maximum="1" Minimum="0" SmallChange="0.01" ValueChanged="SettingsNWPop_Slider_ValueChanged" />
+                <Label Grid.Row="6" Grid.Column="2" Name="SettingsNWPop_Label" />
+                <Slider Grid.Row="6" Grid.Column="3" Name="SettingsNWInf_Slider" LargeChange="0.01" Maximum="1" Minimum="0" SmallChange="0.01" ValueChanged="SettingsNWInf_Slider_ValueChanged" />
+                <Label Grid.Row="6" Grid.Column="4" Name="SettingsNWInf_Label"  />
+            </Grid>
+        </Grid>
+
+        <!-- flyover panel -->
+        <Grid Grid.ColumnSpan="5" Grid.RowSpan="5" Name="Space_Grid" Background="Wheat" HorizontalAlignment="Left" VerticalAlignment="Top" Visibility="Collapsed">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="25"/>
+                <RowDefinition Height="4"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="10*" />
+                <ColumnDefinition Width="20*" />
+            </Grid.ColumnDefinitions>
+
+            <!-- background -->
+            <Rectangle Grid.ColumnSpan="2" Grid.RowSpan="7" Stroke="Black" StrokeThickness="4" Stretch="Fill" />
+
+            <Label Grid.Row="0" Grid.ColumnSpan="2" Name="SpaceName_Label" FontWeight="Bold" />
+
+            <Label Grid.Row="1" Grid.Column="0" Content="Population:" />
+            <Label Grid.Row="1" Grid.Column="1" Name="SpacePopulation_Label" Content="7,000,000,000" FlowDirection="RightToLeft" />
+
+            <Label Grid.Row="2" Grid.Column="0" Content="Infected:" />
+            <Label Grid.Row="2" Grid.Column="1" Name="SpaceInfected_Label" FlowDirection="RightToLeft" />
+
+            <Label Grid.Row="3" Grid.Column="0" Content="Dead:" />
+            <Label Grid.Row="3" Grid.Column="1" Name="SpaceDead_Label" FlowDirection="RightToLeft" />
+
+            <Label Grid.Row="4" Grid.Column="0" Name="Airport_Label" Content="Airport to" />
+            <Label Grid.Row="4" Grid.Column="1" Name="SpaceAir_Label" />
+
+            <StackPanel Grid.Row="5" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Center">
+                <Image Name="SpaceStreet_Image" Stretch="Fill" Source="/quarantine;component/media/streetpatrol.small.png"/>
+                <Image Name="SpaceVigilanty_Image" Stretch="Fill" Source="/quarantine;component/media/vigilanty.small.png" />
+                <Image Name="SpaceAir_Image" Stretch="Fill" Source="/quarantine;component/media/terminal.small.png" />
+                <Image Name="SpaceRoad_Image" Stretch="Fill" Source="/quarantine;component/media/roadblock.small.png" />
+                <Image Name="SpaceMedic_Image" Stretch="Fill" Source="/quarantine;component/media/hospital.small.png" />
+            </StackPanel>
+        </Grid>
+
+    </Grid>
+</Window>
